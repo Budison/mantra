@@ -93,8 +93,8 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-@Test
-class MainTest {   
+public class MainTest {   
+    @Test
     public void sampleTrueTest() {
         assertTrue(true);
     }
@@ -103,132 +103,18 @@ EOF
 printf "\e[1;96m[STATUS]:\e[0m Default JUnit-content has been added to \e[3mMainTest.java\e[0m.\n"	
 }
 
-insertContentToPom () {
+downloadPom () {
+wget "https://gist.githubusercontent.com/Budison/d9ea6456df140f74976cd5d4ba20beef/raw/fc2b3f295984bde6b6f92bcc676d4b5a05f93580/pom.xml" -O "$1/pom.xml"
+
+printf "\e[1;96m[STATUS]:\e[0m Default Maven-content has been added to \e[3mpom.xml\e[0m.\n"
+}
+
+setPom () {
 pomFile=$1/pom.xml
 projectName=$2
-cat > $pomFile << EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.github.budison.$projectName</groupId>
-    <artifactId>$projectName</artifactId>
-    <version>0.0.1</version>
-
-    <name>$projectName</name>
-    <description>Java Program</description>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <project.java.version>17</project.java.version>
-        <version.maven>3.8.5</version.maven>
-
-        <maven.compiler.release>${project.java.version}</maven.compiler.release>
-        <maven.compiler.encoding>${project.build.sourceEncoding}</maven.compiler.encoding>
-        <maven.resources.encoding>${project.build.sourceEncoding}</maven.resources.encoding>
-
-        <version.dependency.testng>7.5</version.dependency.testng>
-        <version.dependency.tinylog.api>2.4.1</version.dependency.tinylog.api>
-        <version.dependency.tinylog.impl>2.4.1</version.dependency.tinylog.impl>
-
-        <version.plugin.maven.enforcer>3.0.0</version.plugin.maven.enforcer>
-        <version.plugin.maven.jar>3.2.2</version.plugin.maven.jar>
-        <version.plugin.maven.compiler>3.10.1</version.plugin.maven.compiler>
-        <version.plugin.maven.resources>3.2.0</version.plugin.maven.resources>
-        <version.plugin.maven.dependency>3.3.0</version.plugin.maven.dependency>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${version.dependency.testng}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.tinylog</groupId>
-            <artifactId>tinylog-api</artifactId>
-            <version>${version.dependency.tinylog.api}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinylog</groupId>
-            <artifactId>tinylog-impl</artifactId>
-            <version>${version.dependency.tinylog.impl}</version>
-        </dependency>
-    </dependencies>
-
-    <build>
-      <finalName>${project.artifactId}-${project.version}</finalName>
-      <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-enforcer-plugin</artifactId>
-            <version>${version.plugin.maven.enforcer}</version>
-            <executions>
-                <execution>
-                    <id>enforce-maven</id>
-                    <goals>
-                        <goal>enforce</goal>
-                    </goals>
-                    <configuration>
-                        <rules>
-                            <requireJavaVersion>
-                                <version>${project.java.version}</version>
-                            </requireJavaVersion>
-                            <requireMavenVersion>
-                                <version>${version.maven}</version>
-                            </requireMavenVersion>
-                        </rules>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-            <version>${version.plugin.maven.jar}</version>
-            <configuration>
-                <archive>
-                    <index>true</index>
-                    <manifest>
-                        <addClasspath>true</addClasspath>
-                        <classpathPrefix>libs/</classpathPrefix>
-                        <mainClass>com.github.budison.Main</mainClass>
-                    </manifest>
-                </archive>
-            </configuration>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>${version.plugin.maven.compiler}</version>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>${version.plugin.maven.resources}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0-M5</version>
-        </plugin>
-        <plugin>
-            <groupId>com.github.spotbugs</groupId>
-            <artifactId>spotbugs-maven-plugin</artifactId>
-            <version>4.5.3.0</version>
-        </plugin>
-
-      </plugins>
-    </build>
-</project>
-
-EOF
-printf "\e[1;96m[STATUS]:\e[0m Default Maven-content has been added to \e[3mpom.xml\e[0m.\n"
+sed -i "s/#GROUPID#/com.github.budison.$projectName/g" $pomFile
+sed -i "s/#ARTIFACTID#/$projectName/g" $pomFile
+sed -i "s/#APP_NAME#/$projectName/g" $pomFile
 }
 
 insertContentToReadme () {
@@ -324,7 +210,8 @@ createProjectDirectory $projectDirectory
 createFileStructure $projectDirectory
 insertContentToMain $projectDirectory
 insertContentToMainTest $projectDirectory
-insertContentToPom $projectDirectory $projectName
+downloadPom $projectDirectory $projectName
+setPom $projectDirectory $projectName
 insertContentToReadme $projectDirectory $projectName
 addGitignore $projectDirectory
 addGitattributes $projectDirectory
