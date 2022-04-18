@@ -184,7 +184,7 @@ initGit() {
 
 showFinishMessage() {
   projectName=$1
-  printf "\e[1;92m[SUCCESS]:\e[0m The project \e[3m$projectName\e[0m has been created.\n"
+  printf "\e[1;92m[SUCCESS]:\e[0m The project \e[3m$projectName\e[0m has been created successfully.\n"
 }
 
 showWelcomeMessage
