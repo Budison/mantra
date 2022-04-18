@@ -54,9 +54,9 @@ createProjectDirectory() {
 }
 
 createFileStructure() {
-  mkdir -p $1/src/{main/{java/com/github/budison,resources},test/java/com/github/budison}
-  touch $1/src/main/java/com/github/budison/Main.java
-  touch $1/src/test/java/com/github/budison/MainTest.java
+  mkdir -p $1/src/{main/{java/com/github/budison/$2,resources},test/java/com/github/budison/$2}
+  touch $1/src/main/java/com/github/budison/$2/Main.java
+  touch $1/src/test/java/com/github/budison/$2/MainTest.java
   touch $1/pom.xml
   touch $1/README.md
   printf "\e[1;96m[STATUS]:\e[0m The following file structure for the project has been created:\n"
@@ -64,9 +64,9 @@ createFileStructure() {
 }
 
 insertContentToMain() {
-  mainFile=$1/src/main/java/com/github/budison/Main.java
+  mainFile=$1/src/main/java/com/github/budison/$2/Main.java
   cat >$mainFile <<EOF
-package com.github.budison;
+package com.github.budison.$2;
 
 public class Main {
 
@@ -79,9 +79,9 @@ EOF
 }
 
 insertContentToMainTest() {
-  mainTestFile=$1/src/test/java/com/github/budison/MainTest.java
+  mainTestFile=$1/src/test/java/com/github/budison/$2/MainTest.java
   cat >$mainTestFile <<EOF
-package com.github.budison;
+package com.github.budison.$2;
 
 import org.testng.annotations.Test;
 
@@ -94,7 +94,7 @@ public class MainTest {
     }
 }
 EOF
-  printf "\e[1;96m[STATUS]:\e[0m Default JUnit-content has been added to \e[3mMainTest.java\e[0m.\n"
+  printf "\e[1;96m[STATUS]:\e[0m Default content has been added to \e[3mMainTest.java\e[0m.\n"
 }
 
 downloadPom() {
@@ -201,9 +201,9 @@ verifyIfCorrectPath $pathUntilProjectDirectory
 verifyIfCorrectName $projectName
 verifyIfProjectDirectoryExists $projectDirectory
 createProjectDirectory $projectDirectory
-createFileStructure $projectDirectory
-insertContentToMain $projectDirectory
-insertContentToMainTest $projectDirectory
+createFileStructure $projectDirectory $projectName
+insertContentToMain $projectDirectory $projectName
+insertContentToMainTest $projectDirectory $projectName
 downloadPom $projectDirectory $projectName
 setPom $projectDirectory $projectName
 insertContentToReadme $projectDirectory $projectName
