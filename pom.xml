@@ -89,7 +89,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
-                            <mainClass>com.github.budison.Main</mainClass>
+                            <mainClass>#GROUPID#.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

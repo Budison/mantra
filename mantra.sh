@@ -98,7 +98,7 @@ EOF
 }
 
 downloadPom() {
-  wget "https://gist.githubusercontent.com/Budison/d9ea6456df140f74976cd5d4ba20beef/raw/fc2b3f295984bde6b6f92bcc676d4b5a05f93580/pom.xml" -O "$1/pom.xml"
+  wget "https://gist.githubusercontent.com/Budison/d9ea6456df140f74976cd5d4ba20beef/raw/ba91f05f01d95b72d9b5c9350b21852eb9e3cd08/pom.xml" -O "$1/pom.xml"
 
   printf "\e[1;96m[STATUS]:\e[0m Default Maven-content has been added to \e[3mpom.xml\e[0m.\n"
 }
