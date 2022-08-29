@@ -23,6 +23,7 @@
         <version.dependency.testng>7.5</version.dependency.testng>
         <version.dependency.tinylog.api>2.4.1</version.dependency.tinylog.api>
         <version.dependency.tinylog.impl>2.4.1</version.dependency.tinylog.impl>
+        <version.dependency.slf4j-nop>1.7.36</version.dependency.slf4j-nop>1.71.36
 
         <version.plugin.maven.enforcer>3.0.0</version.plugin.maven.enforcer>
         <version.plugin.maven.jar>3.2.2</version.plugin.maven.jar>
@@ -50,6 +51,11 @@
             <groupId>org.tinylog</groupId>
             <artifactId>tinylog-impl</artifactId>
             <version>${version.dependency.tinylog.impl}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>${version.dependency.slf4j-nop}</version>
         </dependency>
     </dependencies>
 
