@@ -14,16 +14,16 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <project.java.version>17</project.java.version>
-        <version.maven>3.8.5</version.maven>
+        <version.maven>3.8.6</version.maven>
 
         <maven.compiler.release>${project.java.version}</maven.compiler.release>
         <maven.compiler.encoding>${project.build.sourceEncoding}</maven.compiler.encoding>
         <maven.resources.encoding>${project.build.sourceEncoding}</maven.resources.encoding>
 
-        <version.dependency.testng>7.5</version.dependency.testng>
-        <version.dependency.tinylog.api>2.4.1</version.dependency.tinylog.api>
-        <version.dependency.tinylog.impl>2.4.1</version.dependency.tinylog.impl>
-        <version.dependency.slf4j-nop>1.7.36</version.dependency.slf4j-nop>1.71.36
+        <version.dependency.testng>7.6.1</version.dependency.testng>
+        <version.dependency.tinylog.api>2.5.0</version.dependency.tinylog.api>
+        <version.dependency.tinylog.impl>2.5.0</version.dependency.tinylog.impl>
+        <version.dependency.slf4j-nop>1.7.36</version.dependency.slf4j-nop>
 
         <version.plugin.maven.enforcer>3.0.0</version.plugin.maven.enforcer>
         <version.plugin.maven.jar>3.2.2</version.plugin.maven.jar>
